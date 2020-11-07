@@ -17,6 +17,7 @@ import { CidadeService } from '../services/domain/cidade.service';
 import { EstadoService } from '../services/domain/estado.service';
 import { ProdutoService } from '../services/domain/produto.service';
 import { CartService } from '../services/domain/cart.service';
+import { ImageUtilService } from '../services/image-util.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CartService } from '../services/domain/cart.service';
     CidadeService,
     EstadoService,
     ProdutoService,
-    CartService
+    CartService,
+    ImageUtilService
     
   ]
 })

@@ -13,4 +13,4 @@ export class ImageUtilService {
         }
         return new Blob([ab], { type: mimeString });
     }
-}
+} 
