@@ -8,7 +8,6 @@ import { CidadeDTO } from '../../models/cidade.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AuthService } from '../../services/auth.service';
-import { s } from '@angular/core/src/render3';
 
 @IonicPage()
 @Component({
@@ -81,11 +80,11 @@ export class SignupPage {
     //Chama o método register do Firebase
     
     //O método abaixo salva as mesmas informações do usuário no REST.
-    this.clienteService.insert(this.formGroup.value)
+  /*   this.clienteService.insert(this.formGroup.value)
       .subscribe(response => {
         this.showInsertOk();
       },
-        error => { });
+        error => { }); */
   }
 
   showInsertOk() {
@@ -117,7 +116,26 @@ export class SignupPage {
       await this.authService.register(email, senha);
    
      } catch (error){
-      console.error(error);
+      console.log(error.code);
+      switch (error.code){
+        
+        case 'auth/email-already-in-use':
+          error.message = 'Este e-mail já está sendo usado.';
+          break;
+
+          case 'auth/invalid-password':
+          error.message = 'Senha precisa ter no mínimo 6 caracteres.';
+          break;
+
+          case 'auth/weak-password':
+            error.message = 'A senha precisa ter, no mínimo, 6 caracteres.';
+            break;
+  
+
+          
+      }
+
+      this.presentToast(error.message);
      } finally {
      this.loading.dismiss();
      }
@@ -129,5 +147,14 @@ export class SignupPage {
       content: "Aguarde...",
     });
     this.loading.present();
+  }
+
+  presentToast(message) {
+    let toast = this.toastCtrl.create({
+      message,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 }
