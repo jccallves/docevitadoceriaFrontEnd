@@ -55,8 +55,8 @@ export class AuthService {
         this.storage.setLocalUser(null);
     }
 
-    autenticar (creds : CredenciaisDTO){
-
+    autenticarPeloFirebase (creds : CredenciaisDTO){
+        return this.authFire.auth.signInWithEmailAndPassword(creds.email, creds.senha);
     }
 
     logOut(){

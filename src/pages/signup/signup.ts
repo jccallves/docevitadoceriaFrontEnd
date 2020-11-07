@@ -20,7 +20,7 @@ export class SignupPage {
   estados: EstadoDTO[];
   cidades: CidadeDTO[];
   private loading: any;
-  
+
 
   constructor(
     public navCtrl: NavController,
@@ -29,7 +29,7 @@ export class SignupPage {
     public cidadeService: CidadeService,
     public estadoService: EstadoService,
     public clienteService: ClienteService,
-    public alertCtrl: AlertController, 
+    public alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private authService: AuthService) {
@@ -78,13 +78,13 @@ export class SignupPage {
     //Chama o método register do Firebase
     this.register();
     //Chama o método register do Firebase
-    
+
     //O método abaixo salva as mesmas informações do usuário no REST.
-  /*   this.clienteService.insert(this.formGroup.value)
+    this.clienteService.insert(this.formGroup.value)
       .subscribe(response => {
         this.showInsertOk();
       },
-        error => { }); */
+        error => { });
   }
 
   showInsertOk() {
@@ -104,43 +104,39 @@ export class SignupPage {
     alert.present();
   }
 
- async register (){
-     // Este método será chamado dentro do método signupUser() para ser aproveitado pelo signup.html
-     //Código para capturar email e senha no formulário do registro 
-     await this.presentLoading();
-     let email = this.formGroup.controls.email.value;
-     let senha = this.formGroup.controls.senha.value;
-     //Código para capturar email e senha no formulário do registro 
+  async register() {
+    // Este método será chamado dentro do método signupUser() para ser aproveitado pelo signup.html
+    //Código para capturar email e senha no formulário do registro 
+    await this.presentLoading();
+    let email = this.formGroup.controls.email.value;
+    let senha = this.formGroup.controls.senha.value;
+    //Código para capturar email e senha no formulário do registro 
 
-     try {
+    try {
       await this.authService.register(email, senha);
-   
-     } catch (error){
-      console.log(error.code);
-      switch (error.code){
-        
+
+    } catch (error) {
+      switch (error.code) {
+
         case 'auth/email-already-in-use':
           error.message = 'Este e-mail já está sendo usado.';
           break;
 
-          case 'auth/invalid-password':
+        case 'auth/invalid-password':
           error.message = 'Senha precisa ter no mínimo 6 caracteres.';
           break;
 
-          case 'auth/weak-password':
-            error.message = 'A senha precisa ter, no mínimo, 6 caracteres.';
-            break;
-  
-
-          
+        case 'auth/weak-password':
+          error.message = 'A senha precisa ter, no mínimo, 6 caracteres.';
+          break;
       }
 
       this.presentToast(error.message);
-     } finally {
-     this.loading.dismiss();
-     }
-     
-     
+    } finally {
+      this.loading.dismiss();
+    }
+
+
   }
   presentLoading() {
     this.loading = this.loadingCtrl.create({
