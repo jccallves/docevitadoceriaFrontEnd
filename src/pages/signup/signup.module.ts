@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { SignupPage } from './signup';
 import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
+import { AuthService } from '../../services/auth.service';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { EstadoService } from '../../services/domain/estado.service';
   ],
   providers: [
     CidadeService,
-    EstadoService
+    EstadoService,
+    AuthService
   ]
 })
 export class SignupPageModule {}

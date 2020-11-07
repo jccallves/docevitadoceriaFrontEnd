@@ -6,6 +6,7 @@ import { StorageService } from "./storage.service";
 import { JwtHelper } from 'angular2-jwt';
 import { HttpClient } from "@angular/common/http";
 import { CartService } from "./domain/cart.service";
+import { AngularFireAuth } from '@angular/fire/auth'
 
 
 @Injectable()
@@ -16,7 +17,8 @@ export class AuthService {
     constructor(
         public http: HttpClient, 
         public storage: StorageService,
-        public cartService: CartService) {
+        public cartService: CartService,
+        private authFire: AngularFireAuth) {
     }
 
     authenticate(creds : CredenciaisDTO) {
@@ -51,5 +53,22 @@ export class AuthService {
 
     logout() {
         this.storage.setLocalUser(null);
+    }
+
+    autenticar (creds : CredenciaisDTO){
+
+    }
+
+    logOut(){
+
+    }
+
+    register(email, senha){
+        console.log("Entrou no register auth service ");
+        return this.authFire.auth.createUserWithEmailAndPassword(email, senha);
+    }
+
+    getAuth(){
+
     }
 }
