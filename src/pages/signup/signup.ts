@@ -79,12 +79,7 @@ export class SignupPage {
     this.register();
     //Chama o método register do Firebase
 
-    //O método abaixo salva as mesmas informações do usuário no REST.
-    this.clienteService.insert(this.formGroup.value)
-      .subscribe(response => {
-        this.showInsertOk();
-      },
-        error => { });
+
   }
 
   showInsertOk() {
@@ -114,7 +109,13 @@ export class SignupPage {
 
     try {
       await this.authService.register(email, senha);
-
+      //O método abaixo salva as mesmas informações do usuário no REST.
+      this.clienteService.insert(this.formGroup.value)
+        .subscribe(response => {
+          this.presentToast("Cadastro realizado com sucesso! Faça o login.");
+          this.navCtrl.setRoot("HomePage");
+        },
+          error => { });
     } catch (error) {
       switch (error.code) {
 

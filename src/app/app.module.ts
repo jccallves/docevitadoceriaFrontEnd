@@ -19,10 +19,11 @@ import { ImageUtilService } from '../services/image-util.service';
 import { AngularFireModule  } from '@angular/fire'
 import { API_CONFIG } from '../configs/api.config';
 import { AngularFireAuthModule } from '@angular/fire/auth'
+import { AuthGuard } from '../guards/auth.guard';
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +31,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(API_CONFIG.firebase),
     AngularFireAuthModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,8 +51,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
     EstadoService,
     ProdutoService,
     CartService,
-    ImageUtilService
-    
+    ImageUtilService,
+    AuthGuard
   ]
 })
 export class AppModule {}

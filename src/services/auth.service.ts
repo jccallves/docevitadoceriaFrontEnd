@@ -64,11 +64,12 @@ export class AuthService {
     }
 
     register(email, senha){
-        console.log("Entrou no register auth service ");
         return this.authFire.auth.createUserWithEmailAndPassword(email, senha);
     }
 
     getAuth(){
-
+        return this.authFire.auth;
     }
+
+   
 }

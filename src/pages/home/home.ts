@@ -22,7 +22,9 @@ export class HomePage {
     public menu: MenuController,
     public auth: AuthService,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+   
+    ) {
 
   }
 
@@ -46,25 +48,39 @@ export class HomePage {
   async login() {
     this.presentLoading();
     try {
-      await this.auth.autenticarPeloFirebase(this.creds);
+
+      //Autentica pelo firebase
+      
+      await this.auth.autenticarPeloFirebase(this.creds)
+      .then(response => {
+        if (response.user){
+          this.navCtrl.setRoot('CategoriasPage');
+        }
+      });
+
+     //Autentica pela api rest 
+     /*  this.auth.authenticate(this.creds)
+      .subscribe(response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('CategoriasPage');
+      },
+      error => {});   */
+
     } catch (error) {
+      console.log(error.code);
       switch (error.code) {
         case 'auth/user-not-found':
-          error.message = 'E-mail não encontrado. Verifique se digitou o email correto.';
+          error.message = 'E-mail não encontrado.';
+          break;
+
+          case 'auth/user-disabled':
+          error.message = 'Este usuário foi desabilitado. Entre em contato com o suporte.';
           break;
       }
       this.presentToast(error.message);
     } finally {
       this.loading.dismiss();
     }
-
-    //this.auth.autenticarPeloFirebase(this.creds);
-    /* this.auth.authenticate(this.creds)
-      .subscribe(response => {
-        this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.navCtrl.setRoot('CategoriasPage');
-      },
-      error => {});    */
   }
 
   signup() {
