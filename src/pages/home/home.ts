@@ -51,23 +51,17 @@ export class HomePage {
 
       //Autentica pelo firebase
       
-      await this.auth.autenticarPeloFirebase(this.creds)
-      .then(response => {
-        if (response.user){
-          this.navCtrl.setRoot('CategoriasPage');
-        }
-      });
+      await this.auth.autenticarPeloFirebase(this.creds);
 
      //Autentica pela api rest 
-     /*  this.auth.authenticate(this.creds)
+      this.auth.authenticate(this.creds)
       .subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot('CategoriasPage');
       },
-      error => {});   */
+      error => {});  
 
     } catch (error) {
-      console.log(error.code);
       switch (error.code) {
         case 'auth/user-not-found':
           error.message = 'E-mail não encontrado.';
