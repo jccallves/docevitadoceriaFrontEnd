@@ -23,9 +23,7 @@ export class HomePage {
     public auth: AuthService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-   
     ) {
-
   }
 
   ionViewWillEnter() {
@@ -48,10 +46,8 @@ export class HomePage {
   async login() {
     this.presentLoading();
     try {
-
       //Autentica pelo firebase
-      
-      await this.auth.autenticarPeloFirebase(this.creds);
+     // await this.auth.autenticarPeloFirebase(this.creds);
 
      //Autentica pela api rest 
       this.auth.authenticate(this.creds)

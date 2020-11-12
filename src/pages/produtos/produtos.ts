@@ -35,9 +35,6 @@ export class ProdutosPage {
         let start = this.items.length;
         this.items = this.items.concat(response['content']);
         let end = this.items.length - 1;
-         //this.loadImageUrls();
-         console.log(this.page);
-         console.log(this.items);
          this.loadImageUrls(start, end);
          loader.dismiss();
       },

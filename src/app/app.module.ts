@@ -20,6 +20,10 @@ import { AngularFireModule  } from '@angular/fire'
 import { API_CONFIG } from '../configs/api.config';
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { AuthGuard } from '../guards/auth.guard';
+import { AngularFireStorageModule } from '@angular/fire/storage'
+import { Camera } from '@ionic-native/camera'
+import { File } from '@ionic-native/file/ngx'
+
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { AuthGuard } from '../guards/auth.guard';
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(API_CONFIG.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireStorageModule
     
   ],
   bootstrap: [IonicApp],
@@ -52,7 +57,9 @@ import { AuthGuard } from '../guards/auth.guard';
     ProdutoService,
     CartService,
     ImageUtilService,
-    AuthGuard
+    AuthGuard,
+    Camera,
+    File
   ]
 })
 export class AppModule {}

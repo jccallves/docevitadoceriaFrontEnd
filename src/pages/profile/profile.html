@@ -1,4 +1,4 @@
-<!--
+<!-- 
   Generated template for the ProfilePage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
@@ -14,7 +14,9 @@
 </ion-header>
 
 <ion-content padding>
+ 
   <ion-avatar>
+    {{avatarBlank}}
     <img class="circle" [src]="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'">
   </ion-avatar>
   <h2 text-center>{{cliente?.nome}}</h2>
